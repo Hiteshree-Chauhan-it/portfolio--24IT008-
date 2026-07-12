@@ -1,30 +1,51 @@
 .skills {
-  padding: 30px 20px;
+  padding: 50px 40px;
   max-width: 700px;
-  margin: 0 auto;
+  margin-right: 30px;
+  text-align: left;
 }
 
 .skills h2 {
-  color: #2c3e50;
-  border-bottom: 2px solid #2c3e50;
-  display: inline-block;
-  padding-bottom: 5px;
+  color: #4a3b5c;
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.skills h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #ffd9c7;
+  margin-top: 8px;
 }
 
 .skills-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  /* justify-content: flex-end;   aligns all pills to the right */
+  align-items: center;
+  gap: 10px 10px;               /* row-gap column-gap so wrapped rows look even */
   list-style: none;
   padding: 0;
-  margin-top: 15px;
+  margin-top: 24px;
 }
 
 .skill-item {
-  background-color: #ecf0f1;
-  color: #2c3e50;
-  padding: 8px 14px;
-  border-radius: 4px;
+  display: inline-block;
+  background-color: #cff3e8;
+  color: #2e4d43;
+  padding: 10px 18px;
+  border-radius: 20px;          /* rounder pill shape, easier to spot as a "tag" */
   font-size: 14px;
-  border: 1px solid #bdc3c7;
+  font-weight: 600;
+  white-space: nowrap;          /* prevents text like "Git & GitHub" from breaking mid-tag */
+  border: 1px solid #a8ddce;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.skill-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 }

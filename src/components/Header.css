@@ -1,17 +1,22 @@
 .header {
-  background-color: #6D94C5;
-  color: #E8DFCA;
-  padding: 25px 20px;
+  background-color: #665080e2;
+  color: #ffffff;
+  padding: 40px 20px;
   text-align: center;
+  border-bottom: 5px solid #ffd9c7;
 }
+
 .site-title {
   margin: 0;
-  font-size: 28px;
-  color: #E8DFCA;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
 }
 
 .header-name {
-  margin: 5px 0 0 0;
-  font-size: 16px;
-  color: #E8DFCA;
+  margin: 8px 0 0 0;
+  font-size: 17px;
+  color: #ede0f5;
+  font-weight: 400;
 }
