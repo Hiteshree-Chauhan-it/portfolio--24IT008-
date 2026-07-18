@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import './App.css'
 import Header from './components/Header';
 import portfolioData from './data/portfolioData';
@@ -5,6 +6,10 @@ import Navbar from './components/Navbar';
 import About from './components/About'
 import Skills from './components/Skills';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+
 
 function App() {
   return (
@@ -12,14 +17,11 @@ function App() {
       <Header siteTitle={portfolioData.siteTitle} name={portfolioData.name}/>
       <Navbar navlinks={portfolioData.navlinks}/>
 
-      <About
-        heading={portfolioData.about.heading} 
-        paragraph={portfolioData.about.paragraph}
-      />
-
-      <Skills
-        heading={portfolioData.skills.heading}  skillList={portfolioData.skills.skillList}
-      />
+      <Routes>
+        <Route path="/" element={<home></home>} />
+        <Route path="/projects" element={<Projects/>}/>
+        <Route path="/contact" element={<Contact/>}/>
+      </Routes>
 
       <Footer name={portfolioData.name} year={portfolioData.footer.year}/>
     </div>
