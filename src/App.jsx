@@ -8,7 +8,7 @@ import Skills from './components/Skills';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
-import Contact from './pages/Contact';
+// import Contact from './pages/Contact';
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<home></home>} />
         <Route path="/projects" element={<Projects/>}/>
-        <Route path="/contact" element={<Contact/>}/>
+        {/* <Route path="/contact" element={<Contact/>}/> */}
       </Routes>
 
       <Footer name={portfolioData.name} year={portfolioData.footer.year}/>
