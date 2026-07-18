@@ -1,17 +1,30 @@
-//This file stores all data so that we can change things easily without touching actual component
 const portfolioData = {
-    siteTitle : "Hiteshree's Portfolio",
-    name : "Hiteshree Chauhan",
-    navlinks : ["About","Skills"],
-    about : {
-        heading:"About me",
-        paragraph : "I'm a passionate software developer with a strong foundation in C++ and Data Structures & Algorithms. I enjoy building modern web applications with the MERN stack and am currently implementing and enhancing my full-stack skills through open-source contributions in Girlscript Summer of Code 2026. I've also recently started exploring System Design to better understand scalable software architectures. Alongside this, I'm expanding my knowledge in AI/ML using Python and libraries such as NumPy, Pandas, and Matplotlib. I enjoy collaborating on impactful projects, continuously learning new technologies, and building solutions that create real-world value."
-    },
-    skills : {
-        heading:"My skills",
-        skillList: ["HTML", "CSS", "JavaScript", "React", "Git & GitHub", "C Programming","Python","C++","Java","Data Structure","Algorithm","Python Libraries","Communication"],
-    },
-    projects: [
+  siteTitle: "My Portfolio",
+  name: "Hiteshree Chauhan",
+
+  // Must be objects with name + path, NOT plain strings.
+  // This is likely why your navbar links were invisible.
+  navLinks: [
+    { name: "Home", path: "/" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
+  ],
+
+  about: {
+    heading: "About Me",
+    paragraph:
+      "I am a final-year IT student passionate about web development. " +
+      "I enjoy building clean, functional websites and learning new " +
+      "technologies like React. This portfolio is my first step into " +
+      "building real-world frontend projects.",
+  },
+
+  skills: {
+    heading: "My Skills",
+    skillList: ["HTML", "CSS", "JavaScript", "React", "Git & GitHub", "C Programming"],
+  },
+
+  projects: [
     {
       title: "Portfolio Website",
       description: "A personal portfolio built using React and Vite, showcasing my skills and background.",
@@ -28,9 +41,10 @@ const portfolioData = {
       tech: ["React", "useState"],
     },
   ],
-    footer :{
-        year : 2026,
-    },
+
+  footer: {
+    year: 2026,
+  },
 };
 
 export default portfolioData;

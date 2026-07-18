@@ -1,13 +1,13 @@
 .footer {
-  background-color: #665080e2;
-  color: #ede0f5;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #5b4382 100%);
+  color: var(--color-accent-light);
   text-align: center;
-  padding: 22px 15px;
+  padding: 26px 15px;
   font-size: 14px;
-  margin-top: 50px;
-  border-top: 5px solid #ffd9c7;
+  margin-top: auto;
 }
 
 .footer p {
   margin: 0;
+  opacity: 0.9;
 }

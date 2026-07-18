@@ -1,22 +1,40 @@
 .header {
-  background-color: #665080e2;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #c0a9e5 100%);
   color: #ffffff;
-  padding: 40px 20px;
+  padding: 70px 20px 60px;
   text-align: center;
-  border-bottom: 5px solid #ffd9c7;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle decorative glow, purely CSS, no images */
+.header::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: var(--color-accent);
+  opacity: 0.15;
+  border-radius: 50%;
 }
 
 .site-title {
   margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: #ffffff;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  position: relative;
+  z-index: 1;
 }
 
 .header-name {
-  margin: 8px 0 0 0;
-  font-size: 17px;
-  color: #ede0f5;
-  font-weight: 400;
+  margin: 14px 0 0 0;
+  font-size: 18px;
+  color: var(--color-accent-light);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
 }
