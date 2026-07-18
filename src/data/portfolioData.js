@@ -11,6 +11,23 @@ const portfolioData = {
         heading:"My skills",
         skillList: ["HTML", "CSS", "JavaScript", "React", "Git & GitHub", "C Programming","Python","C++","Java","Data Structure","Algorithm","Python Libraries","Communication"],
     },
+    projects: [
+    {
+      title: "Portfolio Website",
+      description: "A personal portfolio built using React and Vite, showcasing my skills and background.",
+      tech: ["React", "Vite", "CSS"],
+    },
+    {
+      title: "Student Result Tracker",
+      description: "A small app to record and display student marks and calculate grades.",
+      tech: ["JavaScript", "HTML", "CSS"],
+    },
+    {
+      title: "Simple To-Do App",
+      description: "A basic task manager app to add, complete, and remove daily tasks.",
+      tech: ["React", "useState"],
+    },
+  ],
     footer :{
         year : 2026,
     },

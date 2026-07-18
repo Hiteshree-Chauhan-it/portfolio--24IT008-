@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./Navbar.css"
 
 //Navbar receives an array of link name as a prop 
@@ -7,10 +8,12 @@ function Navbar({ navlinks}){
         <nav className="navbar">
             <ul className="navbar-list">
                 {navlinks.map((link) => (
-                    <li key ={link}>
-                        <a href={`#${link.toLowerCase()}`} className="navbar-link">
-                            {link}
-                        </a>
+                    <li key ={link.path}>
+                        <NavLink
+                            to={link.path}
+                            className={({isActive}) => isActive ? "navbar-link active-link" : "navbar-link"}
+                        > {link.name}
+                        </NavLink>
                     </li>
                 ))}
             </ul>
