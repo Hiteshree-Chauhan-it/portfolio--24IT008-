@@ -1,0 +1,30 @@
+.error-box {
+  background-color: #fff0ee;
+  border: 1px solid #ffcfc7;
+  border-left: 4px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 18px 20px;
+  color: #8a3226;
+  text-align: center;
+}
+
+.error-box p {
+  margin: 0 0 12px 0;
+  font-size: 14.5px;
+}
+
+.retry-btn {
+  padding: 8px 20px;
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.retry-btn:hover {
+  opacity: 0.85;
+}

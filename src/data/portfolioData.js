@@ -42,6 +42,10 @@ const portfolioData = {
     },
   ],
 
+  // New: GitHub username used to fetch live repositories from the GitHub API.
+  // Change this to your own GitHub username.
+  githubUsername: "Hiteshree-Chauhan-it",
+
   footer: {
     year: 2026,
   },

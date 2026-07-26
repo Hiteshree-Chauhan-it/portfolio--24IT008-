@@ -1,7 +1,7 @@
 .projects {
   padding: 60px 40px 70px;
   max-width: 780px;
-  margin-left: 40px;   /* now sits on the LEFT */
+  margin-left: 40px;
   margin-right: auto;
   text-align: left;
 }
@@ -21,6 +21,10 @@
   background-color: var(--color-accent);
   border-radius: 2px;
   margin-top: 10px;
+}
+
+.repo-heading {
+  margin-top: 55px;
 }
 
 .projects-list {
@@ -62,4 +66,44 @@
   font-size: 13.5px;
   color: var(--color-accent);
   font-weight: 600;
+}
+
+/* --- New styles for the GitHub repo list --- */
+.repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.repo-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.repo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.repo-card h3 {
+  margin: 0 0 8px 0;
+  color: var(--color-primary);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.repo-card a {
+  color: var(--color-accent);
+  font-size: 14px;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.repo-card a:hover {
+  text-decoration: underline;
 }
