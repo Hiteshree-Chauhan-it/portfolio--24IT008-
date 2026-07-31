@@ -13,10 +13,7 @@ const portfolioData = {
   about: {
     heading: "About Me",
     paragraph:
-      "I am a final-year IT student passionate about web development. " +
-      "I enjoy building clean, functional websites and learning new " +
-      "technologies like React. This portfolio is my first step into " +
-      "building real-world frontend projects.",
+      "I'm a passionate software developer with a strong foundation in C++ and Data Structures & Algorithms."+"I enjoy building modern web applications with the MERN stack and am currently implementing and enhancing my full-stack skills through open-source contributions in Girlscript Summer of Code 2026. I've also recently started exploring System Design to better understand scalable software architectures. Alongside this, I'm expanding my knowledge in AI/ML using Python and libraries such as NumPy, Pandas, and Matplotlib. I enjoy collaborating on impactful projects, continuously learning new technologies, and building solutions that create real-world value.",
   },
 
   skills: {
