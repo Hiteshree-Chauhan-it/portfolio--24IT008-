@@ -42,3 +42,33 @@
   background-color: var(--color-accent);
   color: #ffffff;
 }
+
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-email-badge {
+  font-size: 14px;
+  color: var(--color-primary);
+  font-weight: 500;
+  padding: 6px 12px;
+  background-color: #f1f5f9;
+  border-radius: 999px;
+}
+
+.navbar-logout-btn {
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-logout-btn:hover {
+  background-color: #dc2626;
+}

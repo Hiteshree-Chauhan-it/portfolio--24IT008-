@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Navbar.css";
 
-// NavLink works like Link (it changes the page without a full reload),
-// but it ALSO knows when its own path matches the current URL.
-// We use that to automatically highlight the active page in the navbar.
 function Navbar({ navLinks }) {
+  const { isAuthenticated, user, logout } = useAuth();
+
   return (
     <nav className="navbar">
       <ul className="navbar-list">
@@ -20,6 +20,42 @@ function Navbar({ navLinks }) {
             </NavLink>
           </li>
         ))}
+
+        {isAuthenticated ? (
+          <>
+            <li className="navbar-user-info">
+              <span className="user-email-badge">👤 {user?.email}</span>
+            </li>
+            <li>
+              <button onClick={logout} className="navbar-logout-btn">
+                Logout
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? "navbar-link active-link" : "navbar-link"
+                }
+              >
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/register"
+                className={({ isActive }) =>
+                  isActive ? "navbar-link active-link" : "navbar-link"
+                }
+              >
+                Register
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

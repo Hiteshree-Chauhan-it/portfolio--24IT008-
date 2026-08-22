@@ -8,6 +8,7 @@ const portfolioData = {
     { name: "Home", path: "/" },
     { name: "Projects", path: "/projects" },
     { name: "Contact", path: "/contact" },
+    { name: "Tasks", path: "/tasks" },
   ],
 
   about: {
