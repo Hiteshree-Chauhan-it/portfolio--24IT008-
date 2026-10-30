@@ -96,3 +96,13 @@ export const deleteTask = async (id, token, onUnauthorized) => {
     headers: getHeaders(token),
   }, onUnauthorized);
 };
+
+// AI Endpoint
+export const generateTaskDescription = async (title, token) => {
+  return request("/api/ai/generate-description", {
+    method: "POST",
+    headers: getHeaders(token),
+    body: JSON.stringify({ title }),
+  });
+};
+

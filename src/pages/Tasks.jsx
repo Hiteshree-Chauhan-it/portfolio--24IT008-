@@ -5,6 +5,7 @@ import {
   createTask as apiCreateTask,
   updateTask as apiUpdateTask,
   deleteTask as apiDeleteTask,
+  generateTaskDescription,
 } from "../api/apiClient";
 import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
@@ -21,6 +22,11 @@ function Tasks() {
   // Form input state for creating a task
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  // AI Generation State (Practical 13)
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiNotice, setAiNotice] = useState(null);
+  const [aiError, setAiError] = useState(null);
 
   // Operation specific loading / error state for write operations (POST, PUT, DELETE)
   const [opLoading, setOpLoading] = useState(false);
@@ -67,10 +73,41 @@ function Tasks() {
       // Reset form
       setTitle("");
       setDescription("");
+      setAiNotice(null);
+      setAiError(null);
     } catch (err) {
       setOpError(`Failed to create task: ${err.message}`);
     } finally {
       setOpLoading(false);
+    }
+  };
+
+  // Generate AI Description (Practical 13)
+  const handleGenerateAIDescription = async () => {
+    if (!title.trim()) {
+      setAiError("Please enter a task title first to generate a description.");
+      return;
+    }
+
+    setAiLoading(true);
+    setAiError(null);
+    setAiNotice(null);
+
+    try {
+      const response = await generateTaskDescription(title.trim(), token);
+
+      if (response && response.description) {
+        setDescription(response.description);
+        setAiNotice(response.disclaimer || "AI-generated suggestion. Please review before using.");
+      }
+    } catch (err) {
+      console.warn("AI generation error:", err);
+      // Fallback message to ensure application continues working smoothly
+      const fallbackText = `Plan and complete the task: "${title.trim()}". Review details and verify deliverables.`;
+      setDescription(fallbackText);
+      setAiNotice("Notice: AI service unavailable. A standard template was provided instead. Please review.");
+    } finally {
+      setAiLoading(false);
     }
   };
 
@@ -150,21 +187,54 @@ function Tasks() {
           </div>
 
           <div className="task-form-group">
-            <label htmlFor="task-description">Description (optional)</label>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+              <label htmlFor="task-description" style={{ margin: 0 }}>Description (optional)</label>
+              <button
+                type="button"
+                onClick={handleGenerateAIDescription}
+                disabled={aiLoading || opLoading || !title.trim()}
+                style={{
+                  background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                  color: "#ffffff",
+                  border: "none",
+                  borderRadius: "6px",
+                  padding: "4px 10px",
+                  fontSize: "0.82rem",
+                  cursor: title.trim() ? "pointer" : "not-allowed",
+                  opacity: title.trim() ? 1 : 0.6,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  fontWeight: "500",
+                }}
+              >
+                {aiLoading ? "✨ Generating..." : "✨ Generate with AI"}
+              </button>
+            </div>
             <textarea
               id="task-description"
-              placeholder="Add details or notes about this task..."
+              placeholder="Add details or notes about this task (or click 'Generate with AI')..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows="3"
-              disabled={opLoading}
+              disabled={opLoading || aiLoading}
             />
+            {aiNotice && (
+              <small style={{ color: "#10b981", display: "block", marginTop: "4px", fontSize: "0.8rem" }}>
+                ℹ️ {aiNotice}
+              </small>
+            )}
+            {aiError && (
+              <small style={{ color: "#ef4444", display: "block", marginTop: "4px", fontSize: "0.8rem" }}>
+                ⚠️ {aiError}
+              </small>
+            )}
           </div>
 
           <button
             type="submit"
             className="create-task-btn"
-            disabled={opLoading || !title.trim()}
+            disabled={opLoading || aiLoading || !title.trim()}
           >
             {opLoading ? "Processing..." : "Add Task"}
           </button>
