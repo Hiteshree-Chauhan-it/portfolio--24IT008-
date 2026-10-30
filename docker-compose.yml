@@ -1,0 +1,55 @@
+services:
+  # 1. MongoDB Database Service
+  mongodb:
+    image: mongo:latest
+    container_name: task_mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - task_network
+
+  # 2. Node.js Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: task_backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/taskmanager
+      - JWT_SECRET=mysecretkey123
+    depends_on:
+      - mongodb
+    networks:
+      - task_network
+
+  # 3. React Frontend Service
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - task_network
+
+# Named volume for database persistence
+volumes:
+  mongo_data:
+
+# Bridge network allowing inter-container DNS communication
+networks:
+  task_network:
+    driver: bridge
