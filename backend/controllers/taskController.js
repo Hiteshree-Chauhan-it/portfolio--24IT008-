@@ -1,5 +1,12 @@
 import NodeCache from "node-cache";
 import Task from "../models/Task.js";
+import taskEmitter from "../events/taskEmitter.js";
+
+// Helper for clean timestamp logging
+const getTimestamp = () => {
+  const now = new Date();
+  return now.toTimeString().split(" ")[0] + "." + String(now.getMilliseconds()).padStart(3, "0");
+};
 
 // Initialize in-memory cache with default TTL of 60 seconds
 const taskCache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
@@ -13,7 +20,7 @@ export const getTasks = async (req, res, next) => {
     const cachedTasks = taskCache.get(cacheKey);
 
     if (cachedTasks) {
-      console.log(`[Cache] HIT: Returning tasks for user ${req.user.id} from in-memory cache`);
+      console.log(`[${getTimestamp()}] [Cache] HIT: Returning tasks for user ${req.user.id} from in-memory cache`);
       res.setHeader("X-Cache", "HIT");
       return res.status(200).json({
         success: true,
@@ -24,7 +31,7 @@ export const getTasks = async (req, res, next) => {
     }
 
     // 2. Cache MISS: Fetch from MongoDB
-    console.log(`[Cache] MISS: Fetching tasks for user ${req.user.id} from MongoDB`);
+    console.log(`[${getTimestamp()}] [Cache] MISS: Fetching tasks for user ${req.user.id} from MongoDB`);
     const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
 
     // 3. Save into cache with 60-second TTL
@@ -42,24 +49,35 @@ export const getTasks = async (req, res, next) => {
   }
 };
 
-// POST /tasks (Invalidates Cache)
+// POST /tasks (Asynchronous Event-Driven Architecture + Cache Invalidation)
 export const createTask = async (req, res, next) => {
   try {
+    console.log(`\n--- [POST /tasks] Incoming Request ---`);
+    console.log(`[${getTimestamp()}] [API Handler] Processing request to create task: "${req.body.title}"`);
+
     const { title, description } = req.body;
 
+    // 1. Save task to MongoDB
     const task = await Task.create({
       title,
       description: description || "",
       completed: false,
       user: req.user.id,
     });
+    console.log(`[${getTimestamp()}] [Database] Task saved to MongoDB with ID: ${task._id}`);
 
-    // Invalidate cache for this user so stale data is never returned
+    // 2. Invalidate cache for this user
     taskCache.del(`tasks_${req.user.id}`);
-    console.log(`[Cache] INVALIDATED: Cache cleared for user ${req.user.id} (Task Created)`);
+    console.log(`[${getTimestamp()}] [Cache] INVALIDATED: Cache cleared for user ${req.user.id}`);
 
+    // 3. Emit asynchronous event (fire-and-forget, non-blocking)
+    taskEmitter.emit("task-created", task);
+
+    // 4. Return API response immediately to Postman
+    console.log(`[${getTimestamp()}] [API Response] Sending 201 Created response back to client NOW`);
     res.status(201).json({
       success: true,
+      message: "Task created successfully",
       data: task,
     });
   } catch (error) {
