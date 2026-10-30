@@ -7,7 +7,7 @@ describe("Backend Health Check API", () => {
 
     // INTENTIONAL FAILURE FOR PRACTICAL DEMONSTRATION:
     // The route returns 200, but we test for 500 so GitHub Actions fails with a red cross (X)
-    expect(res.statusCode).toBe(500);
+    expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(res.body.message).toBe("Backend API is healthy");
   });
