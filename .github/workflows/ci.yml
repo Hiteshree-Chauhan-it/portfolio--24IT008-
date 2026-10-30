@@ -27,7 +27,7 @@ jobs:
 
       # Step 3: Install backend dependencies
       - name: Install backend dependencies
-        run: npm ci
+        run: npm install
         working-directory: backend
 
       # Step 4: Run automated tests
